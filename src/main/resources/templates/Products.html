@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Product List</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	text-align: left;
+	padding: 8px;
+	border-bottom: 1px solid #ddd;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+
+tr:hover {
+	background-color: #f5f5f5;
+}
+</style>
+</head>
+<body>
+	<h1>Products</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Type</th>
+				<th>Price</th>
+				<th>Litres</th>
+				<th>Status</th>
+				<th>Point of Delivery</th>
+				<th>Customer</th>
+				<th>Contact</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="product : ${products}">
+				<td th:text="${product.id}"></td>
+				<td th:text="${product.name}"></td>
+				<td th:text="${product.type}"></td>
+				<td th:text="${product.price}"></td>
+				<td th:text="${product.litres}"></td>
+				<td th:text="${product.status}"></td>
+				<td
+					th:text="${product.pointofdelivery != null} ? ${product.pointofdelivery.commercial_premise + ', ' + product.pointofdelivery.address} : ''"></td>
+				<td><span th:text="${product.customer?.firstname}"></span> <span
+					th:if="${product.customer != null} and ${product.customer.lastname != null}">
+						<th:block th:text="' ' + ${product.customer.lastname}"></th:block>
+				</span> <span
+					th:if="${product.customer == null} or ${product.customer.lastname == null}"></span>
+				</td>
+				<td><span th:text="${product.customer?.email}"></span> <span
+					th:if="${product.customer != null} and ${product.customer.phonenumber != null}">
+						<th:block th:text="' ' + ${product.customer.phonenumber}"></th:block>
+				</span> <span
+					th:if="${product.customer == null} or ${product.customer.phonenumber == null}"></span>
+				</td>
+				<td>
+					<form th:action="@{/deleteproduct/{id}(id=${product.id})}"
+						method="get">
+						<button type="submit">Delete</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>
+		<a th:href="@{/addproduct}">Add Product</a> | <a
+			th:href="@{/addcustomer}">Add Customer</a> | <a
+			th:href="@{/Addpoint_of_delivery}">Add Point of Delivery</a>
+	</p>
+</body>
+</html>

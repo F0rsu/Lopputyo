@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add New Product</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        label {
+            display: inline-block;
+            width: 100px;
+            text-align: right;
+        }
+
+        input[type=text] {
+            width: 300px;
+        }
+
+        input[type=submit] {
+            margin-left: 100px;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add New Product</h1>
+    <form method="post" th:action="@{/saveproduct}">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required />
+        </div>
+        <div>
+            <label for="type">Type:</label>
+            <input type="text" id="type" name="type" required />
+        </div>
+        <div>
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price" required />
+        </div>
+        <div>
+            <label for="litres">Litres:</label>
+            <input type="text" id="litres" name="litres" required />
+        </div>
+        <div>
+            <label for="status">Status:</label>
+            <input type="text" id="status" name="status" required />
+        </div>
+        <select id="commercial_premise" name="pointOfDeliveryId">
+    <option th:each="point_of_delivery : ${deliveryPoints}"
+            th:value="${point_of_delivery.id}"
+            th:text="${point_of_delivery.commercial_premise} + ' - ' + ${point_of_delivery.address}">
+    </option>
+</select>
+       
+
+       
+       
+       
+       
+        <div>
+            <label for="customer">Customer:</label>
+            <select id="customer" name="customer.id">
+                <option th:each="customer : ${customers}"
+                        th:value="${customer.id}"
+                        th:text="${customer.firstname} + ' ' + ${customer.lastname}">
+                </option>
+            </select>
+        </div>
+        <button type="submit">Add Product</button>
+    </form>
+</body>
+</html>

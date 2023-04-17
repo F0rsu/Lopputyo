@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Lopputyö</title>
+</head>
+<body>
+    <h1>Point_of_deliveries</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>Commercial premise</th>
+            <th>Address</th>
+        </tr>
+        <tr th:each="point_of_delivery : ${point_of_deliveries}">
+            <td th:text="${point_of_delivery.commercial_premise}"></td>
+            <td th:text="${point_of_delivery.address}"></td>
+        </tr>
+    </table>
+    
+    <p>
+    <a th:href="@{/Addpoint_of_delivery}">Add Point of Delivery</a>
+    <a th:href="@{/Products}">Products</a>
+    </p>
+</body>
+</html>
