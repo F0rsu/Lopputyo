@@ -41,7 +41,7 @@ public class ProductController {
 		this.customerRepository = customerRepository;
 	}
 
-	// Lisää tuote
+
 	
 
 	// Näytä tuotelistaus
@@ -84,6 +84,28 @@ public class ProductController {
 	}
 
 	
+	@GetMapping("/editproduct/{id}")
+	public String showEditProductForm(@PathVariable("id") Long id, Model model) {
+	    Product product = productRepository.findById(id)
+	            .orElseThrow(() -> new IllegalArgumentException("Invalid product id: " + id));
+	    Iterable<Customer> customers = customerRepository.findAll();
+	    Iterable<PointOfDelivery> deliveryPoints = pointOfDeliveryRepository.findAll();
+	    model.addAttribute("product", product);
+	    model.addAttribute("customers", customers);
+	    model.addAttribute("deliveryPoints", deliveryPoints);
+	    return "Editproduct";
+	}
+
+	@PostMapping("/editproduct/{id}")
+	public String editProduct(@PathVariable("id") Long id, @ModelAttribute Product product, BindingResult bindingResult) {
+	    if (bindingResult.hasErrors()) {
+	        // Handle errors
+	    }
+	    product.setId(id);
+	    productRepository.save(product);
+	    return "redirect:/Products";
+	}
+	
 	
 	
 	
@@ -108,33 +130,10 @@ public class ProductController {
 	
 	
 	
-	@GetMapping("/editproduct/{id}")
-	public String showEditProductForm(@PathVariable("id") Long id, Model model) {
-	    Product product = productRepository.findById(id).orElse(null);
-	    model.addAttribute("product", product);
-	    model.addAttribute("deliveryPoints", pointOfDeliveryRepository.findAll());
-	    model.addAttribute("customers", customerRepository.findAll());
-	    return "Editproduct";
-	}
 	
 	
 	
 	
-	
-	@PostMapping("/updateproduct")
-	public String updateProduct(@ModelAttribute("product") Product product, BindingResult result,
-	        @RequestParam("pointOfDeliveryId") Long pointOfDeliveryId, @RequestParam("customerId") Long customerId) {
-
-	    if (result.hasErrors()) {
-	        return "Editproduct";
-	    }
-	    PointOfDelivery pointOfDelivery = pointOfDeliveryRepository.findById(pointOfDeliveryId).orElse(null);
-	    Customer customer = customerRepository.findById(customerId).orElse(null);
-	    product.setCustomer(customer);
-	    product.setPointofdelivery(pointOfDelivery);
-	    productRepository.save(product);
-	    return "redirect:/Products";
-	}
 	
 	
 	
