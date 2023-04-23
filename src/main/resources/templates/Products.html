@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" />
+
+
 <head>
 	<title>Product List</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -26,7 +29,7 @@
 </head>
 <body>
 	<h1>Products</h1>
-	<table>
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -55,16 +58,16 @@
                 <th:block th:text="' ' + ${product.customer.lastname}"></th:block>
             </span>
         </td>
-        <td><a th:href="@{/deleteproduct/{id}(id=${product.id})}" >Delete</a></td>
-        <td><a th:href="@{/editproduct/{id}(id=${product.id})}" >Edit</a></td>
+        <td><a th:href="@{/deleteproduct/{id}(id=${product.id})}" class="btn btn-xs btn-danger" >Delete</a></td>
+        <td><a th:href="@{/editproduct/{id}(id=${product.id})}" class="btn btn-danger" >Edit</a></td>
     </tr>
 </tbody>
 	</table>
 
 	<p>
-		<a th:href="@{/addproduct}">Add Product</a> |
-		<a th:href="@{/addcustomer}">Add Customer</a> |
-		<a th:href="@{/addpoint_of_delivery}">Add Point of Delivery</a>
+		<a th:href="@{/addproduct}" class="btn btn-success">Add Product</a> |
+		<a th:href="@{/addcustomer}" class="btn btn-success">Add Customer</a> |
+		<a th:href="@{/addpoint_of_delivery}" class="btn btn-success">Add Point of Delivery</a>
 	</p>
 </body>
 </html>

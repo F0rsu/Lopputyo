@@ -117,7 +117,6 @@ public class Point_of_deliveryController {
     
     
     
-  
-
+ 
 
 }

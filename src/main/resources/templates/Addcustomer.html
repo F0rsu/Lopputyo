@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" />
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Add Customer</title>
 </head>
 
@@ -25,8 +25,12 @@
             <label for="phonenumber">Phone Number:</label>
             <input type="tel" id="phonenumber" name="phonenumber" required>
         </p>
-        <button type="submit">Add Customer</button>
+        <button type="submit" class="btn btn-success">Add Customer</button>
+<a th:href="@{/Customers}" class="btn btn-success">Customers</a>
+   
+   
     </form>
+
 </body>
 
 </html>

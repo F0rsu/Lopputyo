@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" />
+
 <head>
     <title>Add a new product</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+    <div class="container">
     <h2>Add a new product</h2>
+    <div class="form-group">
     <form th:object="${product}" th:action="@{/saveProduct}" method="post">
         <input type="hidden" th:field="*{id}" />
         <label for="name">Name:</label>
@@ -23,7 +28,9 @@
                     th:value="${customer.id}"
                     th:text="${customer.firstname + ' ' + customer.lastname}">
             </option>
+       
         </select><br />
+        
         <label for="pointofdelivery">Point of Delivery:</label>
         <select th:field="*{pointofdelivery.id}">
             <option th:each="pointofdelivery : ${deliveryPoints}"
@@ -42,5 +49,6 @@
         </select>
         <button type="submit">Save</button>
     </form>
+</div>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" />
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Lopputyö</title>
@@ -16,17 +17,17 @@
             <td th:text="${point_of_delivery.commercial_premise}"></td>
             <td th:text="${point_of_delivery.address}"></td>
             <td>
-                <form th:action="@{/point_of_delivery/delete}" method="post">
+                <form th:action="@{/point_of_delivery/delete}"  method="post">
                     <input type="hidden" th:name="id" th:value="${point_of_delivery.id}" />
-                    <button type="submit">Delete</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </td>
         </tr>
     </table>
     
     <p>
-        <a th:href="@{/Addpoint_of_delivery}">Add Point of Delivery</a>
-        <a th:href="@{/Products}">Products</a>
+        <a th:href="@{/Addpoint_of_delivery}" class="btn btn-success">Add Point of Delivery</a>
+        <a th:href="@{/Products}" class="btn btn-success">Products</a>
     </p>
 </body>
 </html>

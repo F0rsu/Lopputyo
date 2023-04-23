@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" />
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Add Point of Delivery</title>
+
 </head>
 
 <body>
@@ -17,7 +18,9 @@
             <label for="address">Address:</label>
             <input type="text" id="address" name="address" required>
         </p>
-        <button type="submit">Add Point of Delivery</button>
+        <button type="submit" class="btn btn-success">Add Point of Delivery</button>
+   <a th:href="@{/Point_of_deliveries}" class="btn btn-success">Point of deliveries</a>
+   
     </form>
 </body>
 
