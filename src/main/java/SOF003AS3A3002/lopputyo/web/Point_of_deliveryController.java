@@ -38,7 +38,7 @@ public class Point_of_deliveryController {
     
     
     
-    @RequestMapping("/Addpoint_of_delivery")
+    @RequestMapping("/addpoint_of_delivery")
     public String addPointOfDelivery(Model model) {
         model.addAttribute("point_of_delivery", new PointOfDelivery());
         return "Addpoint_of_delivery";
@@ -51,6 +51,15 @@ public class Point_of_deliveryController {
     }
 
     
+   
+  
+    
+    
+    
+    
+    
+    
+    
     @RequestMapping("/Point_of_deliveries")
     public String pointOfDeliveries(Model model) {
         model.addAttribute("point_of_deliveries", pointOfDeliveryRepository.findAll());
@@ -59,6 +68,16 @@ public class Point_of_deliveryController {
 
 
    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
     
     @PostMapping("/point_of_delivery/delete")
     public String deletePointOfDelivery(@RequestParam("id") Long id, Model model) {
