@@ -2,6 +2,7 @@ package SOF003AS3A3002.lopputyo.web;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -108,16 +110,6 @@ public class ProductController {
 	
 	
 	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
 	@RequestMapping(value = "/deleteproduct/{id}", method = RequestMethod.GET)
 	public String deleteProduct(@PathVariable("id") Long id) {
 	    try {
@@ -140,25 +132,7 @@ public class ProductController {
 	
 	
 	
-	@PostMapping("/api/products")
-	    public ResponseEntity<Product> addProduct(@RequestBody Product product,
-	            @RequestParam("pointOfDeliveryId") Long pointOfDeliveryId,
-	            @RequestParam("customerId") Long customerId) {
-
-	        PointOfDelivery pointOfDelivery = pointOfDeliveryRepository.findById(pointOfDeliveryId).orElse(null);
-	        Customer customer = customerRepository.findById(customerId).orElse(null);
-	        product.setCustomer(customer);
-	        product.setPointofdelivery(pointOfDelivery);
-	        Product savedProduct = productRepository.save(product);
-	        return ResponseEntity.created(URI.create("/api/products/" + savedProduct.getId())).body(savedProduct);
-	    }
-	// http://localhost:8080/api/products?pointOfDeliveryId=1&customerId=1  (post)
-
-
-	 @GetMapping("/api/products")
-	 public List<Product> getAllProducts() {
-	     return (List<Product>) productRepository.findAll();
-	 }
+	
 
 
 }

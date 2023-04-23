@@ -117,12 +117,7 @@ public class Point_of_deliveryController {
     
     
     
-    @PostMapping("/api/points_of_delivery")
-    public ResponseEntity<PointOfDelivery> addPointOfDelivery(@RequestBody PointOfDelivery pointOfDelivery) {
-        PointOfDelivery savedPointOfDelivery = pointOfDeliveryRepository.save(pointOfDelivery);
-        return ResponseEntity.created(URI.create("/api/points_of_delivery/" + savedPointOfDelivery.getId())).body(savedPointOfDelivery);
-    }
-//http://localhost:8080/api/points_of_delivery (post)
+  
 
 
 }

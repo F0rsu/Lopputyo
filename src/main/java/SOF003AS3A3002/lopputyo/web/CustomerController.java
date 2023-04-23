@@ -82,13 +82,6 @@ public class CustomerController {
     
     
 
-    @RequestMapping(value = "/api/customers", method = RequestMethod.POST)
-    @ResponseBody
-    public Customer createCustomer(@RequestBody Customer customer) {
-        return customerRepository.save(customer);
-    }
-
-//http://localhost:8080/api/customers (post)
 
 
 }
