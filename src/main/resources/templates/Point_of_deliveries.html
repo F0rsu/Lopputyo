@@ -10,16 +10,23 @@
         <tr>
             <th>Commercial premise</th>
             <th>Address</th>
+            <th></th>
         </tr>
         <tr th:each="point_of_delivery : ${point_of_deliveries}">
             <td th:text="${point_of_delivery.commercial_premise}"></td>
             <td th:text="${point_of_delivery.address}"></td>
+            <td>
+                <form th:action="@{/point_of_delivery/delete}" method="post">
+                    <input type="hidden" th:name="id" th:value="${point_of_delivery.id}" />
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
         </tr>
     </table>
     
     <p>
-    <a th:href="@{/Addpoint_of_delivery}">Add Point of Delivery</a>
-    <a th:href="@{/Products}">Products</a>
+        <a th:href="@{/Addpoint_of_delivery}">Add Point of Delivery</a>
+        <a th:href="@{/Products}">Products</a>
     </p>
 </body>
 </html>

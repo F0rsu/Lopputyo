@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product</title>
+</head>
+<body>
+    <h1>Edit Product</h1>
+
+    <form th:action="@{/product/update}" th:object="${product}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+
+        <label for="name">Name:</label>
+        <input type="text" th:field="*{name}" id="name"/>
+
+        <label for="type">Type:</label>
+        <input type="text" th:field="*{type}" id="type"/>
+
+        <label for="price">Price:</label>
+        <input type="text" th:field="*{price}" id="price"/>
+
+        <label for="litres">Litres:</label>
+        <input type="text" th:field="*{litres}" id="litres"/>
+
+        <label for="status">Status:</label>
+        <input type="text" th:field="*{status}" id="status"/>
+
+        <label for="pointofdelivery">Point of Delivery:</label>
+<select th:field="*{pointofdelivery}" id="pointofdelivery">
+    <option value="">Choose point of delivery...</option>
+    <option th:each="pod : ${pointofdelivery}" th:value="${pod}" th:selected="${product.pointOfDelivery != null and product.pointOfDelivery == pod}">
+        <span th:text="${pod.commercialPremise}"></span>
+    </option>
+</select>
+        
+       
+       
+       
+       
+        <label for="customer">Customer:</label>
+        <select th:field="*{customer.id}" id="customer">
+            <option value="">Choose customer...</option>
+           <option th:each="c : ${customers}" th:value="${c.id}" th:selected="${product.customer != null and product.customer.id == c.id}">
+   [[${c.name}]]
+</option>
+        </select>
+
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

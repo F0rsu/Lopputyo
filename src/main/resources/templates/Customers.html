@@ -7,39 +7,33 @@
 </head>
 <body>
 	 
-	
-	
 	<h1>Customers</h1>
 	<table class="table table-striped" >
+		<tr>
+			<th>Firstname</th>
+			<th>Lastname</th>
+			<th>Email</th>
+			<th>Phonenumber</th>
+			<th>Action</th>
+		</tr>
 		
-		 <tr>
-    <th>Firstname</th>
-    <th>Lastname</th>
-  <th>Email</th>
-  <th>Phonenumber</th>
-  
-  
-  
-  
-  </tr>
-		
-		
-	
 		<tr th:each="customer : ${customers}">
 			<td th:text="${customer.firstname}"></td>
 			<td th:text="${customer.lastname}"></td>
-		   <td th:text="${customer.email}"></td>
-		   <td th:text="${customer.phonenumber}"></td>
-		
-		
+			<td th:text="${customer.email}"></td>
+			<td th:text="${customer.phonenumber}"></td>
+			<td>
+				<form th:action="@{/delete-customer}" method="post">
+					<input type="hidden" name="id" th:value="${customer.id}" />
+					<button type="submit">Delete</button>
+				</form>
+			</td>
 		</tr>
 	</table>
   
-  <p>
-  <a th:href="@{/addcustomer}">Add Customer</a>
-  <a th:href="@{/Products}">Products</a>
-  </p>
-
-
+  	<p>
+  		<a th:href="@{/addcustomer}">Add Customer</a>
+  		<a th:href="@{/Products}">Products</a>
+  	</p>
 </body>
 </html>

@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+
+
 @Repository
-public interface CustomerRepository extends CrudRepository<Customer, Long> {
-	List<Product> findById(Customer id);
+public interface PointOfDeliveryRepository extends CrudRepository<PointOfDelivery, Long>{
+	List<Product> findByAddress(PointOfDelivery address);
 }
+
 
 

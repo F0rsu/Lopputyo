@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Bean;
 
 import SOF003AS3A3002.lopputyo.domain.Customer;
 import SOF003AS3A3002.lopputyo.domain.CustomerRepository;
-import SOF003AS3A3002.lopputyo.domain.Point_of_delivery;
-import SOF003AS3A3002.lopputyo.domain.Point_of_deliveryRepository;
+import SOF003AS3A3002.lopputyo.domain.PointOfDelivery;
+import SOF003AS3A3002.lopputyo.domain.PointOfDeliveryRepository;
 import SOF003AS3A3002.lopputyo.domain.Product;
 import SOF003AS3A3002.lopputyo.domain.ProductRepository;
 
@@ -28,7 +28,7 @@ public class LopputyoApplication {
 
 
 	@Bean
-	public CommandLineRunner demoData(ProductRepository productRepository, CustomerRepository customerRepository, Point_of_deliveryRepository point_of_deliveryRepository) {
+	public CommandLineRunner demoData(ProductRepository productRepository, CustomerRepository customerRepository, PointOfDeliveryRepository pointOfDeliveryRepository) {
 	    return (args) -> {
 	        Product product1 = new Product("Gambina", "Wine", 11.43f, 0.70f, "delivered", null ,null);
 	        productRepository.save(product1);
@@ -52,12 +52,12 @@ public class LopputyoApplication {
 	        
 		
 	        
-	        Point_of_delivery point_of_delivery1 = new Point_of_delivery("Bar Joku", "Jokukatu12");
-	        Point_of_delivery point_of_delivery2 = new Point_of_delivery("Bar Ketä", "Kukakatu56");
-	        Point_of_delivery point_of_delivery3 = new Point_of_delivery("Bar Jotain", "Aleksanterinkatu2");
-	        point_of_deliveryRepository.save(point_of_delivery1);
-	        point_of_deliveryRepository.save(point_of_delivery2);
-	        point_of_deliveryRepository.save(point_of_delivery3);
+	        PointOfDelivery point_of_delivery1 = new PointOfDelivery("Bar Joku", "Jokukatu12");
+	        PointOfDelivery point_of_delivery2 = new PointOfDelivery("Bar Ketä", "Kukakatu56");
+	        PointOfDelivery point_of_delivery3 = new PointOfDelivery("Bar Jotain", "Aleksanterinkatu2");
+	        pointOfDeliveryRepository.save(point_of_delivery1);
+	        pointOfDeliveryRepository.save(point_of_delivery2);
+	        pointOfDeliveryRepository.save(point_of_delivery3);
 	       
 	        //adding few delivery places for the database
 	        

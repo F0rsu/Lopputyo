@@ -27,10 +27,10 @@ public class Product {
 	@JsonIgnoreProperties ("products") 
 	@JoinColumn(name = "customerid", referencedColumnName = "id")
     private Customer customer;
-    
+	
     @ManyToOne
     @JoinColumn(name = "pointofdeliveryid", referencedColumnName = "id")
-    private Point_of_delivery pointofdelivery;
+    private PointOfDelivery pointofdelivery;
 
 	public Product() {
 		this.name = "";
@@ -40,7 +40,7 @@ public class Product {
 		this.status = "";
 	}
 
-	public Product(String name, String type, float price, float litres, String status, Point_of_delivery pointofdelivery, Customer customer) {
+	public Product(String name, String type, float price, float litres, String status, PointOfDelivery pointofdelivery, Customer customer) {
 		this.name = name;
 		this.type = type;
 		this.price = price;
@@ -78,9 +78,6 @@ public class Product {
 	}
 
 	
-	public Point_of_delivery getPointofdelivery() {
-		return pointofdelivery;
-	}
 	
 	
 	public Customer getCustomer () {
@@ -99,7 +96,12 @@ public class Product {
 	
 	
 	
-	public void setPointofdelivery (Point_of_delivery pointofdelivery) {
+	public PointOfDelivery getPointofdelivery() {
+		return pointofdelivery;
+	}
+	
+	
+	public void setPointofdelivery (PointOfDelivery pointofdelivery) {
 		this.pointofdelivery=pointofdelivery;
 	}
 	
@@ -133,7 +135,7 @@ public class Product {
 	public String toString() {
 		if(this.pointofdelivery != null && this.customer != null)
 		return "Product [id=" + id + ", name=" + name + ", type=" + type + ", price=" + price + ", litres=" + litres
-				+ ", status=" + status + ",  pointOfDelivery=" + pointofdelivery + ", customer=" + customer +"]";
+				+ ", status=" + status + ",  pointofdelivery=" + pointofdelivery + ", customer=" + customer +"]";
 	
 	   if(this.pointofdelivery != null)
 		   return "Product [id=" + id + ", name=" + name + ", type=" + type + ", price=" + price + ", litres=" + litres

@@ -16,7 +16,7 @@ import jakarta.persistence.OneToMany;
 
 
 @Entity
-public class Point_of_delivery {
+public class PointOfDelivery {
 
 	
 	@Id 
@@ -39,13 +39,13 @@ public class Point_of_delivery {
     
     
     
-    public Point_of_delivery() {
+    public PointOfDelivery() {
 	
 	}
 
 
 
-	public Point_of_delivery(String commercial_premise, String address) {
+	public PointOfDelivery(String commercial_premise, String address) {
 		super();
 		this.id = 0;
 		this.commercial_premise = commercial_premise;

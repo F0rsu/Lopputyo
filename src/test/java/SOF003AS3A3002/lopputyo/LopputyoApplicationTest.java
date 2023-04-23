@@ -11,8 +11,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import SOF003AS3A3002.lopputyo.domain.Customer;
 import SOF003AS3A3002.lopputyo.domain.CustomerRepository;
-import SOF003AS3A3002.lopputyo.domain.Point_of_delivery;
-import SOF003AS3A3002.lopputyo.domain.Point_of_deliveryRepository;
+import SOF003AS3A3002.lopputyo.domain.PointOfDelivery;
+import SOF003AS3A3002.lopputyo.domain.PointOfDeliveryRepository;
 import SOF003AS3A3002.lopputyo.domain.Product;
 import SOF003AS3A3002.lopputyo.domain.ProductRepository;
 import SOF003AS3A3002.lopputyo.web.ProductController;
@@ -29,13 +29,13 @@ class LopputyoApplicationTest {
 	private CustomerRepository customerRepository;
 	
 	@Autowired
-	private Point_of_deliveryRepository point_of_deliveryRepository;
+	private PointOfDeliveryRepository pointOfDeliveryRepository;
 	
 	
 	@Test
 	public void createNewProduct() {
-		Point_of_delivery pointOfDelivery1 = new Point_of_delivery("Point1", "Helsinki");
-	    point_of_deliveryRepository.save(pointOfDelivery1);
+		PointOfDelivery pointOfDelivery1 = new PointOfDelivery("Point1", "Helsinki");
+	    pointOfDeliveryRepository.save(pointOfDelivery1);
 		
 		Customer customer1 = new Customer("John", "Doe", "john.doe@example.com", "0123456789");
 	    customerRepository.save(customer1);

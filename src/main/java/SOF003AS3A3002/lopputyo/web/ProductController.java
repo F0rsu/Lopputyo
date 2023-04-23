@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import SOF003AS3A3002.lopputyo.domain.Customer;
 import SOF003AS3A3002.lopputyo.domain.CustomerRepository;
-import SOF003AS3A3002.lopputyo.domain.Point_of_delivery;
-import SOF003AS3A3002.lopputyo.domain.Point_of_deliveryRepository;
+import SOF003AS3A3002.lopputyo.domain.PointOfDelivery;
+import SOF003AS3A3002.lopputyo.domain.PointOfDeliveryRepository;
 import SOF003AS3A3002.lopputyo.domain.Product;
 import SOF003AS3A3002.lopputyo.domain.ProductRepository;
 
@@ -29,17 +29,19 @@ import SOF003AS3A3002.lopputyo.domain.ProductRepository;
 public class ProductController {
 
 	private final ProductRepository productRepository;
-	private final Point_of_deliveryRepository pointOfDeliveryRepository;
+	private final PointOfDeliveryRepository pointOfDeliveryRepository;
 	private final CustomerRepository customerRepository;
 
 	@Autowired
-	public ProductController(ProductRepository productRepository, Point_of_deliveryRepository pointOfDeliveryRepository,
+	public ProductController(ProductRepository productRepository, PointOfDeliveryRepository pointOfDeliveryRepository,
 			CustomerRepository customerRepository) {
 		this.productRepository = productRepository;
 		this.pointOfDeliveryRepository = pointOfDeliveryRepository;
 		this.customerRepository = customerRepository;
 	}
 
+	// Lisää tuote
+	
 	@RequestMapping(value = "/addproduct")
 	public String showAddProductForm(Model model) {
 		model.addAttribute("product", new Product());
@@ -48,35 +50,94 @@ public class ProductController {
 		return "addproduct";
 	}
 
+	// Näytä tuotelistaus
+	
 	@RequestMapping("/Products")
 	public String products(Model model) {
 		model.addAttribute("products", productRepository.findAll());
-		model.addAttribute("product", new Product()); // add this line
+		model.addAttribute("customer", customerRepository.findAll());
+		model.addAttribute("deliveryPoints", pointOfDeliveryRepository.findAll());
 		return "Products";
 	}
 
+	
+	
+	
+
+	
+	
+	
+	// tallenna tuote
+	
 	@RequestMapping(value = "/saveproduct", method = RequestMethod.POST)
 	public String saveProduct(@ModelAttribute("product") Product product, BindingResult result,
-			@RequestParam("pointOfDeliveryId") Long pointOfDeliveryId, @RequestParam("customer.id") Long customerId) {
+	        @RequestParam("pointOfDelivery.id") Long pointOfDeliveryId, @RequestParam("customer.id") Long customerId) {
 
-		if (result.hasErrors()) {
-			return "addproduct";
-		}
-		Point_of_delivery pointOfDelivery = pointOfDeliveryRepository.findById(pointOfDeliveryId).orElse(null);
-		Customer customer = customerRepository.findById(customerId).orElse(null);
-		product.setCustomer(customer);
-		product.setPointofdelivery(pointOfDelivery);
-		productRepository.save(product);
-		return "redirect:/Products";
+	    if (result.hasErrors()) {
+	        return "addproduct";
+	    }
+	    PointOfDelivery pointOfDelivery = pointOfDeliveryRepository.findById(pointOfDeliveryId).orElse(null);
+	    Customer customer = customerRepository.findById(customerId).orElse(null);
+	    product.setCustomer(customer);
+	    product.setPointofdelivery(pointOfDelivery);
+	    productRepository.save(product);
+	    return "redirect:/Products";
 	}
 	
 	
-	 @PostMapping("/api/products")
+	
+	
+	@RequestMapping(value = "/deleteproduct/{id}", method = RequestMethod.GET)
+	public String deleteProduct(@PathVariable("id") Long id) {
+	    try {
+	        productRepository.deleteById(id);
+	        return "redirect:/Products";
+	    } catch (EmptyResultDataAccessException e) {
+	        return "redirect:/Products";
+	    }
+	}
+	
+	
+	
+	@GetMapping("/editproduct/{id}")
+	public String showEditProductForm(@PathVariable("id") Long id, Model model) {
+	    Product product = productRepository.findById(id).orElse(null);
+	    model.addAttribute("product", product);
+	    model.addAttribute("deliveryPoints", pointOfDeliveryRepository.findAll());
+	    model.addAttribute("customers", customerRepository.findAll());
+	    return "Editproduct";
+	}
+	
+	
+	
+	
+	
+	@PostMapping("/updateproduct")
+	public String updateProduct(@ModelAttribute("product") Product product, BindingResult result,
+	        @RequestParam("pointOfDeliveryId") Long pointOfDeliveryId, @RequestParam("customerId") Long customerId) {
+
+	    if (result.hasErrors()) {
+	        return "Editproduct";
+	    }
+	    PointOfDelivery pointOfDelivery = pointOfDeliveryRepository.findById(pointOfDeliveryId).orElse(null);
+	    Customer customer = customerRepository.findById(customerId).orElse(null);
+	    product.setCustomer(customer);
+	    product.setPointofdelivery(pointOfDelivery);
+	    productRepository.save(product);
+	    return "redirect:/Products";
+	}
+	
+	
+	
+	
+	
+	
+	@PostMapping("/api/products")
 	    public ResponseEntity<Product> addProduct(@RequestBody Product product,
 	            @RequestParam("pointOfDeliveryId") Long pointOfDeliveryId,
 	            @RequestParam("customerId") Long customerId) {
 
-	        Point_of_delivery pointOfDelivery = pointOfDeliveryRepository.findById(pointOfDeliveryId).orElse(null);
+	        PointOfDelivery pointOfDelivery = pointOfDeliveryRepository.findById(pointOfDeliveryId).orElse(null);
 	        Customer customer = customerRepository.findById(customerId).orElse(null);
 	        product.setCustomer(customer);
 	        product.setPointofdelivery(pointOfDelivery);
