@@ -15,8 +15,9 @@ import jakarta.persistence.ManyToOne;
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+
 	private String name;
 	private String type;
 	private float price;
@@ -38,6 +39,7 @@ public class Product {
 		this.price = 0.0f;
 		this.litres = 0.0f;
 		this.status = "";
+		this.customer = new Customer(); // set a default value for the customer property
 	}
 
 	public Product(String name, String type, float price, float litres, String status, PointOfDelivery pointofdelivery, Customer customer) {

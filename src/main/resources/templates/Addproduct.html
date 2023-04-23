@@ -5,7 +5,7 @@
 </head>
 <body>
     <h2>Add a new product</h2>
-    <form th:object="${product}" th:action="@{/saveproduct}" method="post">
+    <form th:object="${product}" th:action="@{/saveProduct}" method="post">
         <input type="hidden" th:field="*{id}" />
         <label for="name">Name:</label>
         <input type="text" th:field="*{name}" /><br />
@@ -25,13 +25,20 @@
             </option>
         </select><br />
         <label for="pointofdelivery">Point of Delivery:</label>
-        <select th:field="*{pointOfDelivery.id}">
-            <option value="">-- Select a Point of Delivery --</option>
-            <option th:each="pointOfDelivery : ${pointofdeliveries}"
-                    th:value="${pointOfDelivery.id}"
-                    th:text="${pointOfDelivery.commercial_premise + ' ' + pointOfDelivery.address}"
-                    th:if="${pointOfDelivery != null}">
-            </option>
+        <select th:field="*{pointofdelivery.id}">
+            <option th:each="pointofdelivery : ${deliveryPoints}"
+        th:if="${pointofdelivery != null}"
+        th:value="${pointofdelivery.id}"
+        th:text="${pointofdelivery.commercial_premise + ' ' + pointofdelivery.address}">
+</option>
+       
+       
+ 
+       
+        
+       
+       
+       
         </select>
         <button type="submit">Save</button>
     </form>

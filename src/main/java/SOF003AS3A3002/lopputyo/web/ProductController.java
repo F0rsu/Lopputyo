@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import SOF003AS3A3002.lopputyo.domain.Customer;
 import SOF003AS3A3002.lopputyo.domain.CustomerRepository;
 import SOF003AS3A3002.lopputyo.domain.PointOfDelivery;
@@ -42,13 +43,6 @@ public class ProductController {
 
 	// Lisää tuote
 	
-	@RequestMapping(value = "/addproduct")
-	public String showAddProductForm(Model model) {
-		model.addAttribute("product", new Product());
-		model.addAttribute("deliveryPoints", pointOfDeliveryRepository.findAll());
-		model.addAttribute("customers", customerRepository.findAll());
-		return "addproduct";
-	}
 
 	// Näytä tuotelistaus
 	
@@ -62,27 +56,42 @@ public class ProductController {
 
 	
 	
-	
 
 	
-	
-	
-	// tallenna tuote
-	
-	@RequestMapping(value = "/saveproduct", method = RequestMethod.POST)
-	public String saveProduct(@ModelAttribute("product") Product product, BindingResult result,
-	        @RequestParam("pointOfDelivery.id") Long pointOfDeliveryId, @RequestParam("customer.id") Long customerId) {
 
-	    if (result.hasErrors()) {
-	        return "addproduct";
+		
+	
+	
+	
+		
+	@PostMapping("/saveProduct")
+	public String saveProduct(@ModelAttribute Product product, BindingResult bindingResult) {
+	    if (bindingResult.hasErrors()) {
+	        // Handle errors
 	    }
-	    PointOfDelivery pointOfDelivery = pointOfDeliveryRepository.findById(pointOfDeliveryId).orElse(null);
-	    Customer customer = customerRepository.findById(customerId).orElse(null);
-	    product.setCustomer(customer);
-	    product.setPointofdelivery(pointOfDelivery);
 	    productRepository.save(product);
 	    return "redirect:/Products";
 	}
+
+	@GetMapping("/addproduct")
+	public String showAddProductForm(Model model) {
+	    Iterable<Customer> customers = customerRepository.findAll();
+	    Iterable<PointOfDelivery> deliveryPoints = pointOfDeliveryRepository.findAll();
+	    model.addAttribute("product", new Product());
+	    model.addAttribute("customers", customers);
+	    model.addAttribute("deliveryPoints", deliveryPoints);
+	    return "Addproduct";
+	}
+
+	
+	
+	
+	
+	
+
+	
+	
+	
 	
 	
 	
